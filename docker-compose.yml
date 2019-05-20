@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  mastermind:
+    restart: always
+
+    build:
+      context: .
+      args:
+        - environment=docker
+
+    ports:
+      - "8080:27074"
+
+    environment:
+      - APP_ENV=config-docker
+
+  mongodb:
+    image: mongo:4.0
+
+    ports:
+      - '37017:27017'
+
+    volumes:
+      - './tmp/mongo:/data/db'
